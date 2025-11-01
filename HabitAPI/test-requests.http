@@ -1,0 +1,95 @@
+### Habit Tracker API Test Requests
+
+@baseUrl = http://localhost:5134
+@userId = test-user-1
+
+### Get all habits
+GET {{baseUrl}}/api/habits?userId={{userId}}
+
+### Get active habits only
+GET {{baseUrl}}/api/habits/active?userId={{userId}}
+
+### Get specific habit by ID
+GET {{baseUrl}}/api/habits/1?userId={{userId}}
+
+### Get habit statistics
+GET {{baseUrl}}/api/habits/1/stats?userId={{userId}}
+
+### Create a new habit
+POST {{baseUrl}}/api/habits?userId={{userId}}
+Content-Type: application/json
+
+{
+  "name": "Meditation",
+  "description": "Daily mindfulness meditation practice",
+  "category": "Wellness",
+  "frequency": 1,
+  "targetCount": 1,
+  "unit": "minutes",
+  "targetValue": 15,
+  "colorCode": "#9B59B6",
+  "startDate": "2024-10-31"
+}
+
+### Update an existing habit
+PUT {{baseUrl}}/api/habits/1?userId={{userId}}
+Content-Type: application/json
+
+{
+  "name": "Morning Exercise - Updated",
+  "description": "Extended morning exercise routine",
+  "category": "Health",
+  "frequency": 1,
+  "targetCount": 1,
+  "unit": "minutes",
+  "targetValue": 45,
+  "colorCode": "#E74C3C",
+  "isActive": true
+}
+
+### Create a habit entry
+POST {{baseUrl}}/api/habitentries?userId={{userId}}
+Content-Type: application/json
+
+{
+  "habitId": 1,
+  "completedAt": "2024-10-31T08:00:00Z",
+  "count": 1,
+  "actualValue": 35,
+  "notes": "Great morning workout session!",
+  "rating": 8,
+  "location": "Home gym",
+  "durationMinutes": 35
+}
+
+### Get entries for a specific habit
+GET {{baseUrl}}/api/habitentries/habit/1?userId={{userId}}
+
+### Get entries for a specific date
+GET {{baseUrl}}/api/habitentries/date/2024-10-31?userId={{userId}}
+
+### Get recent entries (last 7 days)
+GET {{baseUrl}}/api/habitentries/recent?days=7&userId={{userId}}
+
+### Get specific habit entry
+GET {{baseUrl}}/api/habitentries/1?userId={{userId}}
+
+### Update a habit entry
+PUT {{baseUrl}}/api/habitentries/1?userId={{userId}}
+Content-Type: application/json
+
+{
+  "completedAt": "2024-10-31T08:00:00Z",
+  "count": 1,
+  "actualValue": 40,
+  "notes": "Updated: Excellent workout with extra cardio",
+  "rating": 9,
+  "location": "Home gym",
+  "durationMinutes": 40
+}
+
+### Delete a habit entry
+DELETE {{baseUrl}}/api/habitentries/1?userId={{userId}}
+
+### Delete a habit (this will also delete all related entries)
+DELETE {{baseUrl}}/api/habits/1?userId={{userId}}

@@ -1,0 +1,6 @@
+@HabitAPI_HostAddress = http://localhost:5134
+
+GET {{HabitAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
