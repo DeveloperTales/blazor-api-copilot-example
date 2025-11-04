@@ -137,84 +137,88 @@
 </div>
 
 <!-- Create/Edit Habit Modal -->
-<div class="modal fade" id="habitModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">@(editingHabit == null ? "Create New Habit" : "Edit Habit")</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <EditForm Model="habitForm" OnValidSubmit="SaveHabit">
-                    <DataAnnotationsValidator />
-                    
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name *</label>
-                        <InputText id="name" class="form-control" @bind-Value="habitForm.Name" />
-                        <ValidationMessage For="() => habitForm.Name" />
-                    </div>
+@if (showModal)
+{
+    <div class="modal fade show" style="display: block;" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@(editingHabit == null ? "Create New Habit" : "Edit Habit")</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="habitForm" OnValidSubmit="SaveHabit">
+                        <DataAnnotationsValidator />
+                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name *</label>
+                            <InputText id="name" class="form-control" @bind-Value="habitForm.Name" />
+                            <ValidationMessage For="() => habitForm.Name" />
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <InputTextArea id="description" class="form-control" rows="3" @bind-Value="habitForm.Description" />
-                        <ValidationMessage For="() => habitForm.Description" />
-                    </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <InputTextArea id="description" class="form-control" rows="3" @bind-Value="habitForm.Description" />
+                            <ValidationMessage For="() => habitForm.Description" />
+                        </div>
 
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="category" class="form-label">Category</label>
-                            <InputText id="category" class="form-control" @bind-Value="habitForm.Category" />
-                            <ValidationMessage For="() => habitForm.Category" />
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="category" class="form-label">Category</label>
+                                <InputText id="category" class="form-control" @bind-Value="habitForm.Category" />
+                                <ValidationMessage For="() => habitForm.Category" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="frequency" class="form-label">Frequency</label>
+                                <InputSelect id="frequency" class="form-select" @bind-Value="habitForm.Frequency">
+                                    <option value="@HabitFrequency.Daily">Daily</option>
+                                    <option value="@HabitFrequency.Weekly">Weekly</option>
+                                    <option value="@HabitFrequency.Monthly">Monthly</option>
+                                </InputSelect>
+                                <ValidationMessage For="() => habitForm.Frequency" />
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="frequency" class="form-label">Frequency</label>
-                            <InputSelect id="frequency" class="form-select" @bind-Value="habitForm.Frequency">
-                                <option value="@HabitFrequency.Daily">Daily</option>
-                                <option value="@HabitFrequency.Weekly">Weekly</option>
-                                <option value="@HabitFrequency.Monthly">Monthly</option>
-                            </InputSelect>
-                            <ValidationMessage For="() => habitForm.Frequency" />
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="targetCount" class="form-label">Target Count</label>
-                            <InputNumber id="targetCount" class="form-control" @bind-Value="habitForm.TargetCount" />
-                            <ValidationMessage For="() => habitForm.TargetCount" />
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="targetCount" class="form-label">Target Count</label>
+                                <InputNumber id="targetCount" class="form-control" @bind-Value="habitForm.TargetCount" />
+                                <ValidationMessage For="() => habitForm.TargetCount" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="unit" class="form-label">Unit</label>
+                                <InputText id="unit" class="form-control" @bind-Value="habitForm.Unit" placeholder="e.g., minutes, pages, cups" />
+                                <ValidationMessage For="() => habitForm.Unit" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="targetValue" class="form-label">Target Value</label>
+                                <InputNumber id="targetValue" class="form-control" @bind-Value="habitForm.TargetValue" step="0.01" />
+                                <ValidationMessage For="() => habitForm.TargetValue" />
+                            </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="unit" class="form-label">Unit</label>
-                            <InputText id="unit" class="form-control" @bind-Value="habitForm.Unit" placeholder="e.g., minutes, pages, cups" />
-                            <ValidationMessage For="() => habitForm.Unit" />
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="targetValue" class="form-label">Target Value</label>
-                            <InputNumber id="targetValue" class="form-control" @bind-Value="habitForm.TargetValue" step="0.01" />
-                            <ValidationMessage For="() => habitForm.TargetValue" />
-                        </div>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="colorCode" class="form-label">Color</label>
-                        <div class="d-flex align-items-center">
-                            <input type="color" id="colorCode" class="form-control form-control-color me-2" 
-                                   value="@(habitForm.ColorCode ?? "#007bff")" 
-                                   @onchange="(e) => habitForm.ColorCode = e.Value?.ToString()" />
-                            <InputText class="form-control" @bind-Value="habitForm.ColorCode" placeholder="#007bff" />
+                        <div class="mb-3">
+                            <label for="colorCode" class="form-label">Color</label>
+                            <div class="d-flex align-items-center">
+                                <input type="color" id="colorCode" class="form-control form-control-color me-2" 
+                                       value="@(habitForm.ColorCode ?? "#007bff")" 
+                                       @onchange="(e) => habitForm.ColorCode = e.Value?.ToString()" />
+                                <InputText class="form-control" @bind-Value="habitForm.ColorCode" placeholder="#007bff" />
+                            </div>
+                            <ValidationMessage For="() => habitForm.ColorCode" />
                         </div>
-                        <ValidationMessage For="() => habitForm.ColorCode" />
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">
-                            @(editingHabit == null ? "Create Habit" : "Update Habit")
-                        </button>
-                    </div>
-                </EditForm>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">
+                                @(editingHabit == null ? "Create Habit" : "Update Habit")
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="modal-backdrop fade show" @onclick="CloseModal"></div>
+}
 

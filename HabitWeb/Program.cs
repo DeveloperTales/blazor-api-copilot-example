@@ -7,12 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Configure HttpClient for API communication
-builder.Services.AddHttpClient<IHabitApiService, HabitApiService>(client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5134"); // API base URL
-});
-
 // Register our services
 builder.Services.AddScoped<IHabitApiService, HabitApiService>();
 

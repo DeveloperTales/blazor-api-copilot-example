@@ -19,6 +19,7 @@ public partial class Habits : ComponentBase
     private bool isLoading = true;
     private CreateHabitDto habitForm = new();
     private HabitDto? editingHabit = null;
+    private bool showModal = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,7 +34,7 @@ public partial class Habits : ComponentBase
         StateHasChanged();
     }
 
-    private async Task OpenCreateModal()
+    private void OpenCreateModal()
     {
         editingHabit = null;
         habitForm = new CreateHabitDto
@@ -42,11 +43,10 @@ public partial class Habits : ComponentBase
             Frequency = HabitFrequency.Daily,
             TargetCount = 1
         };
-        await JSRuntime.InvokeVoidAsync("new bootstrap.Modal", "#habitModal").AsTask();
-        await JSRuntime.InvokeVoidAsync("document.getElementById('habitModal').querySelector('.modal').addEventListener", "shown.bs.modal", "function() { document.getElementById('name').focus(); }");
+        showModal = true;
     }
 
-    private async Task EditHabit(HabitDto habit)
+    private void EditHabit(HabitDto habit)
     {
         editingHabit = habit;
         habitForm = new CreateHabitDto
@@ -60,7 +60,7 @@ public partial class Habits : ComponentBase
             TargetValue = habit.TargetValue,
             ColorCode = habit.ColorCode
         };
-        await JSRuntime.InvokeVoidAsync("new bootstrap.Modal", "#habitModal").AsTask();
+        showModal = true;
     }
 
     private async Task SaveHabit()
@@ -73,8 +73,7 @@ public partial class Habits : ComponentBase
                 var created = await HabitApiService.CreateHabitAsync(habitForm);
                 if (created != null)
                 {
-                    await JSRuntime.InvokeVoidAsync("bootstrap.Modal.getInstance", "#habitModal").AsTask();
-                    await JSRuntime.InvokeVoidAsync("document.getElementById('habitModal').querySelector('.btn-close').click");
+                    showModal = false;
                     await LoadHabits();
                 }
             }
@@ -97,8 +96,7 @@ public partial class Habits : ComponentBase
                 var updated = await HabitApiService.UpdateHabitAsync(editingHabit.Id, updateDto);
                 if (updated != null)
                 {
-                    await JSRuntime.InvokeVoidAsync("bootstrap.Modal.getInstance", "#habitModal").AsTask();
-                    await JSRuntime.InvokeVoidAsync("document.getElementById('habitModal').querySelector('.btn-close').click");
+                    showModal = false;
                     await LoadHabits();
                 }
             }
@@ -107,6 +105,11 @@ public partial class Habits : ComponentBase
         {
             Console.WriteLine($"Error saving habit: {ex.Message}");
         }
+    }
+
+    private void CloseModal()
+    {
+        showModal = false;
     }
 
     private async Task MarkComplete(int habitId)

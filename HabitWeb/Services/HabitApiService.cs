@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using HabitModels.DTOs.Habits;
 using HabitModels.DTOs.HabitEntries;
 
@@ -25,9 +24,12 @@ public class HabitApiService : IHabitApiService
     private readonly HttpClient _httpClient;
     private readonly string _userId = "test-user-1"; // Temporary until authentication is implemented
 
-    public HabitApiService(HttpClient httpClient)
+    public HabitApiService()
     {
-        _httpClient = httpClient;
+        _httpClient = new HttpClient
+        {
+            BaseAddress = new Uri("http://localhost:5134")
+        };
     }
 
     public async Task<List<HabitDto>> GetHabitsAsync()
@@ -37,8 +39,9 @@ public class HabitApiService : IHabitApiService
             var response = await _httpClient.GetFromJsonAsync<List<HabitDto>>($"/api/habits?userId={_userId}");
             return response ?? new List<HabitDto>();
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return new List<HabitDto>();
         }
     }
@@ -50,8 +53,9 @@ public class HabitApiService : IHabitApiService
             var response = await _httpClient.GetFromJsonAsync<List<HabitDto>>($"/api/habits/active?userId={_userId}");
             return response ?? new List<HabitDto>();
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return new List<HabitDto>();
         }
     }
@@ -62,8 +66,9 @@ public class HabitApiService : IHabitApiService
         {
             return await _httpClient.GetFromJsonAsync<HabitDto>($"/api/habits/{id}?userId={_userId}");
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -79,8 +84,9 @@ public class HabitApiService : IHabitApiService
             }
             return null;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -96,8 +102,9 @@ public class HabitApiService : IHabitApiService
             }
             return null;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -109,8 +116,9 @@ public class HabitApiService : IHabitApiService
             var response = await _httpClient.DeleteAsync($"/api/habits/{id}?userId={_userId}");
             return response.IsSuccessStatusCode;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return false;
         }
     }
@@ -121,8 +129,9 @@ public class HabitApiService : IHabitApiService
         {
             return await _httpClient.GetFromJsonAsync<HabitStatsDto>($"/api/habits/{id}/stats?userId={_userId}");
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -134,8 +143,9 @@ public class HabitApiService : IHabitApiService
             var response = await _httpClient.GetFromJsonAsync<List<HabitEntryDto>>($"/api/habitentries/habit/{habitId}?userId={_userId}");
             return response ?? new List<HabitEntryDto>();
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return new List<HabitEntryDto>();
         }
     }
@@ -151,8 +161,9 @@ public class HabitApiService : IHabitApiService
             }
             return null;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -164,8 +175,9 @@ public class HabitApiService : IHabitApiService
             var response = await _httpClient.DeleteAsync($"/api/habitentries/{id}?userId={_userId}");
             return response.IsSuccessStatusCode;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return false;
         }
     }
@@ -178,8 +190,9 @@ public class HabitApiService : IHabitApiService
             var response = await _httpClient.GetFromJsonAsync<List<HabitEntryDto>>($"/api/habitentries/date/{dateString}?userId={_userId}");
             return response ?? new List<HabitEntryDto>();
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return new List<HabitEntryDto>();
         }
     }
@@ -191,8 +204,9 @@ public class HabitApiService : IHabitApiService
             var response = await _httpClient.GetFromJsonAsync<List<HabitEntryDto>>($"/api/habitentries/recent?days={days}&userId={_userId}");
             return response ?? new List<HabitEntryDto>();
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             return new List<HabitEntryDto>();
         }
     }
