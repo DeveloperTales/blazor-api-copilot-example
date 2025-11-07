@@ -22,6 +22,35 @@ Before starting this tutorial, ensure you have:
 - ✅ [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) installed and activated
 - ✅ Basic familiarity with C#, Blazor, and ASP.NET Core
 
+## Fresh Start Option
+
+If you've been experimenting with the code and want to start with a clean slate, or if you want to work with enhanced GitHub Copilot instructions, you can switch to the `added-instructions` branch:
+
+```bash
+# Switch to the branch with copilot instructions and clean code
+git checkout added-instructions
+
+# Verify you're on the correct branch
+git branch
+
+# Build and run to ensure everything works
+dotnet build
+```
+
+**What you'll get in the `added-instructions` branch:**
+- 📋 **Enhanced Copilot Instructions**: Comprehensive `.github/copilot-instructions.md` file with project-specific guidelines
+- 🧹 **Clean Codebase**: No experimental changes or modifications
+- 🎯 **Optimized for Learning**: Code structured specifically for the tutorial exercises
+- 📚 **Better AI Context**: Copilot will have detailed understanding of the project architecture and coding standards
+
+**When to use this branch:**
+- ✅ You're starting the tutorial for the first time
+- ✅ You've made changes to the main branch and want a fresh start
+- ✅ You want to experience Copilot with enhanced project context
+- ✅ You're running this tutorial in a workshop or classroom setting
+
+**Note**: You can always switch back to `main` with `git checkout main` if needed.
+
 ## 🚀 Exercise 1: Getting Started with Copilot
 
 ### Objective
@@ -59,6 +88,8 @@ Familiarize yourself with using GitHub Copilot for basic application operations.
 
 ### Objective
 Use GitHub Copilot Agent mode to identify and fix a bug in the habit deletion workflow.
+
+> 💡 **Fresh Start Tip**: If you've made changes and want to start this exercise with a clean codebase, consider switching to the `added-instructions` branch as described in the [Fresh Start Option](#-fresh-start-option) section above.
 
 ### The Problem
 
