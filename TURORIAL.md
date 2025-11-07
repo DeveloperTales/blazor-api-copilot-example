@@ -571,13 +571,4 @@ Found an issue or have suggestions for improving this tutorial?
 
 ---
 
-## ✨ Next Steps
-
-After completing this tutorial:
-
-1. **Explore the Codebase**: Review the implementation details of features you built
-2. **Customize the Application**: Add your own features using Copilot
-3. **Share Your Experience**: Write a blog post or create a video about your learning
-4. **Contribute Back**: Submit improvements to this tutorial or the project
-
 **Happy Coding with GitHub Copilot! 🚀**
