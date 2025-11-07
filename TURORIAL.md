@@ -561,14 +561,4 @@ Use Copilot to add comprehensive XML documentation to existing code following th
 
 ---
 
-## 💬 Feedback and Contributions
-
-Found an issue or have suggestions for improving this tutorial?
-
-- 🐛 [Report a bug](https://github.com/DeveloperTales/blazor-api-copilot-example/issues/new?labels=bug)
-- 💡 [Suggest an improvement](https://github.com/DeveloperTales/blazor-api-copilot-example/issues/new?labels=enhancement)
-- 📖 [Contribute to documentation](https://github.com/DeveloperTales/blazor-api-copilot-example/pulls)
-
----
-
 **Happy Coding with GitHub Copilot! 🚀**
