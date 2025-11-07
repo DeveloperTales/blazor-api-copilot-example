@@ -103,15 +103,6 @@ dotnet run --urls="https://localhost:5001;http://localhost:5000"
 
 2. **Press F5** to run both projects simultaneously
 
-### Option 3: Using VS Code
-
-```bash
-# Use the provided tasks.json configuration
-Ctrl+Shift+P → "Tasks: Run Task" → "Start All Projects"
-```
-
-## 🌐 Application URLs
-
 Once running, access the applications at:
 
 - **🖥️ Blazor Web App**: [http://localhost:5000](http://localhost:5000) or [https://localhost:5001](https://localhost:5001)
@@ -126,137 +117,136 @@ This project includes comprehensive AI assistance configurations:
 - **`.github/chatmodes/Habit.chatmode.md`**: Specialized chatmode for this project
 - **`AGENTS.md`**: Universal agent instructions for consistent AI assistance
 
-### 🎯 Copilot Usage Examples
+### 🎓 Interactive Learning
 
-1. **Code Generation**: 
-   ```csharp
-   // Type a comment and let Copilot generate the implementation
-   // Create a method to calculate habit completion percentage
-   ```
+Want to learn how to use GitHub Copilot effectively? This project includes a comprehensive hands-on tutorial!
 
-2. **Test Creation**:
-   ```csharp
-   // Generate unit tests for the HabitService class
-   ```
+**👉 [Start the Tutorial](TUTORIAL.md)**
 
-3. **Documentation**:
-   ```csharp
-   /// <summary>
-   /// [Let Copilot complete the XML documentation]
-   ```
+The tutorial covers:
+- 🐛 **Debugging with Copilot Agent** - Fix real bugs with AI assistance
+- 🧪 **Creating Unit Tests** - Set up test projects and write comprehensive tests
+- ✨ **Adding New Features** - Implement complete features from scratch
+- 📝 **Generating Documentation** - Create professional XML documentation
+- 🎯 **Best Practices** - Learn effective prompting techniques
+
+**Estimated Time**: 60-90 minutes | **Skill Level**: Beginner to Intermediate
+
+## 📚 Project Structure
+
+### HabitAPI (Backend)
+```
+HabitAPI/
+├── Controllers/          # API endpoints
+│   ├── HabitsController.cs
+│   ├── HabitEntriesController.cs
+│   └── QuotesController.cs
+├── Services/            # Business logic
+│   ├── HabitService.cs
+│   └── HabitEntryService.cs
+├── Data/               # Database context
+│   └── HabitDbContext.cs
+└── Program.cs          # Application startup
+```
+
+### HabitWeb (Frontend)
+```
+HabitWeb/
+├── Components/
+│   ├── Pages/          # Routable pages
+│   │   ├── Home.razor
+│   │   ├── Habits.razor
+│   │   ├── Analytics.razor
+│   │   └── Calendar.razor
+│   └── Layout/         # Shared layouts
+├── Services/           # API client services
+│   ├── HabitApiService.cs
+│   └── QuoteApiService.cs
+└── wwwroot/           # Static files
+```
+
+### HabitModels (Shared)
+```
+HabitModels/
+├── Models/            # Domain entities
+│   ├── Habit.cs
+│   ├── HabitEntry.cs
+│   ├── User.cs
+│   └── Quote.cs
+└── DTOs/             # Data Transfer Objects
+    ├── Habits/
+    └── HabitEntries/
+```
+
+## 🛠️ Technologies Used
+
+- **Framework**: .NET 8.0
+- **Frontend**: Blazor Server with InteractiveServer render mode
+- **Backend**: ASP.NET Core Web API
+- **Database**: Entity Framework Core (In-Memory for development)
+- **UI**: Bootstrap 5, Font Awesome icons
+- **API Documentation**: Swagger/OpenAPI
+- **AI Assistant**: GitHub Copilot
 
 ## 🧪 Testing
 
-### Run Unit Tests
+The project includes a comprehensive test suite (if you completed the tutorial):
+
 ```bash
+# Run all tests
 dotnet test
+
+# Run tests with code coverage
+dotnet test /p:CollectCoverage=true
 ```
 
-### API Testing
-Use the built-in Swagger UI at `/swagger` or tools like:
-- **HTTP files**: Use the `.http` files in the API project
-- **curl**: Command-line testing examples in `/docs/api-examples.md`
+## 📖 API Documentation
 
-## 📚 Project Structure Deep Dive
+Once the API is running, access the interactive Swagger documentation at:
+- [https://localhost:5134/swagger](https://localhost:5134/swagger)
 
-### 🎨 Blazor Components (Code-Behind Pattern)
-```
-HabitWeb/Components/Pages/
-├── Home.razor          # Dashboard markup
-├── Home.razor.cs       # Dashboard logic
-├── Habits.razor        # Habit management markup
-└── Habits.razor.cs     # Habit management logic
-```
+Key endpoints:
+- `GET /api/habits` - Retrieve all habits
+- `POST /api/habits` - Create a new habit
+- `PUT /api/habits/{id}` - Update an existing habit
+- `DELETE /api/habits/{id}` - Delete a habit
+- `GET /api/quotes/random` - Get a random motivational quote
 
-### 🌐 API Controllers
-```
-HabitAPI/Controllers/
-├── HabitsController.cs       # Habit CRUD operations
-└── HabitEntriesController.cs # Habit entry tracking
-```
+## 🤝 Contributing
 
-### 📦 Shared Models
-```
-HabitModels/
-├── Models/
-│   ├── Habit.cs           # Domain entity
-│   ├── HabitEntry.cs      # Completion tracking
-│   └── User.cs            # User management
-└── DTOs/
-    ├── Habits/            # Habit-related DTOs
-    └── HabitEntries/      # Entry-related DTOs
-```
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes:
 
-## 🛠️ Development Workflow
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-### 1. AI-Assisted Feature Development
-```bash
-# 1. Describe the feature to Copilot
-# 2. Let Copilot suggest implementation approach
-# 3. Iteratively refine with AI assistance
-# 4. Use Copilot for documentation and tests
-```
+## 📝 License
 
-### 2. Code Quality Assurance
-- **XML Documentation**: Required for all public methods
-- **Error Handling**: Comprehensive try-catch patterns
-- **Validation**: Client and server-side validation
-- **Testing**: Unit tests for business logic
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### 3. Architecture Patterns
-- **Repository Pattern**: Data access abstraction
-- **Service Layer**: Business logic separation
-- **DTO Pattern**: Data contract definition
-- **Dependency Injection**: Loose coupling
+## 💬 Support
 
-## 🔧 Configuration
+- 🐛 [Report a Bug](https://github.com/DeveloperTales/blazor-api-copilot-example/issues/new?labels=bug)
+- 💡 [Request a Feature](https://github.com/DeveloperTales/blazor-api-copilot-example/issues/new?labels=enhancement)
+- 📖 [View Documentation](TUTORIAL.md)
 
-### Database
-- **Development**: Entity Framework In-Memory database
-- **Seed Data**: Automatic test data generation
-- **Connection**: No configuration required for development
+## 🌟 Acknowledgments
 
-## 📖 Learning Resources
+- Built with ❤️ to demonstrate GitHub Copilot's capabilities
+- Inspired by real-world development workflows
+- Designed for educational purposes
 
-### GitHub Copilot Best Practices
-- [GitHub Copilot Documentation](https://docs.github.com/copilot)
-- [Copilot in VS Code](https://code.visualstudio.com/docs/editor/github-copilot)
+## 📚 Additional Resources
 
-### .NET & Blazor Resources
-- [Blazor Documentation](https://docs.microsoft.com/aspnet/core/blazor)
-- [ASP.NET Core Web API](https://docs.microsoft.com/aspnet/core/web-api)
-- [Entity Framework Core](https://docs.microsoft.com/ef/core)
-
-## 🏆 Acknowledgments
-
-- **GitHub Copilot** for AI-powered development assistance
-- **Microsoft** for .NET 8 and Blazor framework
-- **Bootstrap** for responsive UI components
-- **Font Awesome** for beautiful icons
+- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
+- [Blazor Documentation](https://docs.microsoft.com/en-us/aspnet/core/blazor/)
+- [ASP.NET Core Documentation](https://docs.microsoft.com/en-us/aspnet/core/)
+- [Entity Framework Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
 
 ---
 
-## 💡 Pro Tips for GitHub Copilot Users
+**Happy Coding with GitHub Copilot! 🚀**
 
-### 🎯 Effective Prompting
-```csharp
-// ✅ Good: Specific and contextual
-// Create a method to validate habit input and return validation errors
-
-// ❌ Poor: Vague and generic  
-// Make a validation method
-```
-
-### 🔄 Iterative Development
-1. Start with a clear comment describing the intent
-2. Let Copilot suggest the implementation
-3. Refine and adjust with follow-up prompts
-4. Use Copilot for documentation and tests
-
-### 📚 Context Awareness
-- Keep related files open for better suggestions
-- Use meaningful variable and method names
-- Maintain consistent coding patterns
-- Leverage the project's existing architecture
-
-**Happy coding with your AI pair programmer! 🚀🤖**
+Made with 🤖 by [DeveloperTales](https://github.com/DeveloperTales)
