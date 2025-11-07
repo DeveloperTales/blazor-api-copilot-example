@@ -212,32 +212,6 @@ Key endpoints:
 - `DELETE /api/habits/{id}` - Delete a habit
 - `GET /api/quotes/random` - Get a random motivational quote
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 💬 Support
-
-- 🐛 [Report a Bug](https://github.com/DeveloperTales/blazor-api-copilot-example/issues/new?labels=bug)
-- 💡 [Request a Feature](https://github.com/DeveloperTales/blazor-api-copilot-example/issues/new?labels=enhancement)
-- 📖 [View Documentation](TUTORIAL.md)
-
-## 🌟 Acknowledgments
-
-- Built with ❤️ to demonstrate GitHub Copilot's capabilities
-- Inspired by real-world development workflows
-- Designed for educational purposes
-
 ## 📚 Additional Resources
 
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
